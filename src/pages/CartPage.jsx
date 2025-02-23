@@ -16,11 +16,13 @@ export default function CartPage(){
 
     const getCartInfo = async () => {  
         try {
+            setIsWindowLoading(true);
             const res = await axios.get(`${BASE_URL}/v2/api/${API_PATH}/cart`);
             const cartData = res.data.data.carts;
             setCart(cartData);
             setCartTotal(res.data.data.final_total);
             cartData.length === 0 ? setCartIsEmpty(true) : setCartIsEmpty(false);
+            setIsWindowLoading(false);
         } catch (error) {
             console.error(error);
         }
